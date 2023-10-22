@@ -7,3 +7,17 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+
+function nestedLink() {
+  const links = document.querySelectorAll('.product');
+
+  links.forEach((link) => {
+    link.addEventListener('click', () => {
+      window.location.href = `product/show/${link.id}`;
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  nestedLink();
+});
