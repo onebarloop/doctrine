@@ -18,15 +18,6 @@ function nestedLink() {
   });
 }
 
-// function timer() {
-//   const error = document.querySelector('.error');
-//   if (error) {
-//     // setInterval(() => error.remove(), 3000);
-//     error.classList.add('!opacity-0');
-//   }
-// }
-
 document.addEventListener('DOMContentLoaded', () => {
   nestedLink();
-  // timer();
 });
