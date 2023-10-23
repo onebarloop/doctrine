@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello NoteController!
+{% endblock %}
+{% block body %}
+
+	<h1 class="mb-12 text-[25px]">My Notes</h1>
+
+	<div class="">
+		{% for note in notes %}
+			<div id="{{ note.id }}" class="note cursor-pointer hover:bg-slate-300 note p-2 grid grid-cols-3 gap-y-4 items-start {% if loop.index is odd %} bg-slate-200 {% else %} bg-slate-100 {% endif %}">
+				<div class="">{{ note.title }}</div>
+				<div>{{ note.text|length > 15 ? note.text|slice(0, 15) ~ '...' : note.text  }}</div>
+				<a class="text-center border-2 rounded opacity-50 hover:opacity-100 transition-all duration-300 bg-red-300" href="/notes/delete/{{note.id}}">Delete</a>
+			</div>
+		{% endfor %}
+
+		<form action="/notes/create" method="get" class="my-12 flex flex-col gap-4">
+			<div class="relative">
+				{% if error %}
+					<p class="error text-red-500 absolute bottom-0 opacity-0 animate-fadeInOut">Please give name and Description</p>
+				{% endif %}
+			</div>
+
+
+			<div class="flex flex-col">
+				<label for="name">Name</label>
+				<input class="border-2" type="text" name="name" id="name">
+			</div>
+
+			<div class="flex flex-col">
+				<label for="description">Description</label>
+				<textarea class="border-2" type="textarea" name="description" id="description"></textarea>
+
+			</div>
+			<button class="btn" type="submit">Submit</button>
+		</form>
+
+	</div>
+{% endblock %}

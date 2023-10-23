@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %}Detail
+{% endblock %}
+{% block body %}
+
+	<div class="flex flex-col gap-8">
+
+		<h1 class="text-center text-[20px]">{{ note.title }}</h1>
+		<p class="border-2 p-4">{{ note.text }}</p>
+		<div>Created at:
+			{{ note.createdAt|date('d/m/Y') }}
+		</div>
+		<a class="btn" href="{{path('notes')}}">Back</a>
+
+	</div>
+{% endblock %}
