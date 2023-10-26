@@ -14,7 +14,8 @@ class NotesController extends AbstractController
     #[Route('/notes', name: 'notes')]
     public function defaultAction(EntityManagerInterface $entityManager, Request $request): Response
     {
-        $error = $request->query->get('failed') == 1 ? true : false;
+        dump($request->query->get('state'));
+        $state = $request->query->get('state');
 
         $repository = $entityManager->getRepository(Notes::class);
 
@@ -22,7 +23,7 @@ class NotesController extends AbstractController
 
         return $this->render('/notes/index.html.twig', [
             'notes' => $notes,
-            'error' => $error
+            'state' => $state
         ]);
     }
 
@@ -48,7 +49,7 @@ class NotesController extends AbstractController
 
         if (empty($note->getTitle()) || empty($note->getText())) {
             return $this->redirectToRoute('notes', [
-                'failed' => true
+                'state' => 'failed'
             ]);
         }
 
@@ -57,7 +58,9 @@ class NotesController extends AbstractController
         $entityManager->persist($note);
         $entityManager->flush();
 
-        return $this->redirectToRoute('notes');
+        return $this->redirectToRoute('notes', [
+            'state' => 'success'
+        ]);
     }
 
 

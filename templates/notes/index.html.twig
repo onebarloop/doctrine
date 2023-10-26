@@ -9,13 +9,15 @@
 			<div id="{{ note.id }}" class="note cursor-pointer hover:bg-slate-300 note p-2 grid grid-cols-3 gap-y-4 items-start {% if loop.index is odd %} bg-slate-200 {% else %} bg-slate-100 {% endif %}">
 				<div class="">{{ note.title }}</div>
 				<div>{{ note.text|length > 15 ? note.text|slice(0, 15) ~ '...' : note.text  }}</div>
-				<a class="text-center border-2 rounded opacity-50 hover:opacity-100 transition-all duration-300 bg-red-300" href="/notes/delete/{{note.id}}">Delete</a>
+				<a class="text-center border-2 rounded opacity-50 hover:opacity-100 transition-all duration-300 bg-red-300" href="/notes/delete/{{ note.id }}">Delete</a>
 			</div>
 		{% endfor %}
 		<form action="/notes/create" method="get" class="my-12 flex flex-col gap-4">
 			<div class="relative">
-				{% if error %}
+				{% if state == 'failed' %}
 					<p class="error text-red-500 absolute bottom-0 opacity-0 animate-fadeInOut">Please give name and Description</p>
+				{% elseif state == 'success' %}
+					<p class="error text-green-800 absolute bottom-0 opacity-0 animate-fadeInOut">Note created!</p>
 				{% endif %}
 			</div>
 			<div class="flex flex-col">
