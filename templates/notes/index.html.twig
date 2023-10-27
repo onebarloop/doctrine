@@ -17,7 +17,9 @@
 				{% if state == 'failed' %}
 					<p class="error text-red-500 absolute bottom-0 opacity-0 animate-fadeInOut">Please give name and Description</p>
 				{% elseif state == 'success' %}
-					<p class="error text-green-800 absolute bottom-0 opacity-0 animate-fadeInOut">Note created!</p>
+					<p class="error text-green-800 absolute bottom-0 opacity-0 animate-fadeInOut">Note created!
+						<span>{{ icon }}</span>
+					</p>
 				{% endif %}
 			</div>
 			<div class="flex flex-col">

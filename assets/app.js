@@ -13,7 +13,7 @@ function nestedLink() {
 
   links.forEach((link) => {
     link.addEventListener('click', () => {
-      window.location.href = `notes/show/${link.id}`;
+      window.location.href = `/notes/show/${link.id}`;
     });
   });
 }
