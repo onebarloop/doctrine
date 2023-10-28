@@ -8,6 +8,14 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
+function showButton() {
+  const btn = document.querySelector('.js-update-btn');
+  const input = document.querySelector('.js-update-field');
+  input.addEventListener('click', () => {
+    btn.classList.toggle('h-0');
+  });
+}
+
 function nestedLink() {
   const links = document.querySelectorAll('.note');
 
@@ -20,4 +28,5 @@ function nestedLink() {
 
 document.addEventListener('DOMContentLoaded', () => {
   nestedLink();
+  showButton();
 });

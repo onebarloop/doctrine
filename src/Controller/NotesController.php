@@ -41,13 +41,20 @@ class NotesController extends AbstractController
         ]);
     }
 
-    #[Route('notes/show/{id}')]
-    public function detailAction(EntityManagerInterface $entityManager, int $id): Response
+    #[Route('notes/show/{id}/{update}', name: 'show')]
+    public function detailAction(EntityManagerInterface $entityManager, Randicon $randicon, int $id, string $update = null): Response
     {
+        $icon = null;
+        if ($update) {
+            $icon = $randicon->getRandIcon();
+        }
+
         $note = $entityManager->getRepository(Notes::class)->find($id);
 
         return $this->render('/notes/detail.html.twig', [
-            'note' => $note
+            'note' => $note,
+            'update' => $update,
+            'icon' => $icon
         ]);
     }
 
@@ -66,9 +73,6 @@ class NotesController extends AbstractController
         $note = new Notes();
         $note->setTitle($name);
         $note->setText($description);
-
-
-
         $note->setCreatedAt(new \DateTimeImmutable('now', new \DateTimeZone('Europe/Berlin')));
 
         $entityManager->persist($note);
@@ -89,5 +93,20 @@ class NotesController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('notes');
+    }
+
+    #[Route('notes/update/{id}')]
+    public function updateNote(EntityManagerInterface $entityManager, Request $request, int $id)
+    {
+        $note = $entityManager->getRepository(Notes::class)->find($id);
+        $text = $request->query->get('text');
+
+        $note->setText($text);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show', [
+            'id' => $id,
+            'update' => 'update'
+        ]);
     }
 }
