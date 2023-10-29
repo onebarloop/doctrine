@@ -3,9 +3,6 @@ module.exports = {
   content: ['./assets/**/*.js', './templates/**/*.html.twig'],
   theme: {
     extend: {
-      transitionProperty: {
-        height: 'height',
-      },
       keyframes: {
         fadeInOut: {
           '0%': { opacity: 0 },

@@ -6,9 +6,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Notes;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use App\Service\Randicon;
 
 class NotesController extends AbstractController
@@ -23,7 +23,6 @@ class NotesController extends AbstractController
     #[Route('/notes/list/{state}', name: 'notes')]
     public function defaultAction(EntityManagerInterface $entityManager, Randicon $randicon, string $state = null): Response
     {
-
         $icon = null;
 
         if ($state === 'success') {
@@ -41,6 +40,7 @@ class NotesController extends AbstractController
         ]);
     }
 
+
     #[Route('notes/show/{id}/{update}', name: 'show')]
     public function detailAction(EntityManagerInterface $entityManager, Randicon $randicon, int $id, string $update = null): Response
     {
@@ -57,6 +57,7 @@ class NotesController extends AbstractController
             'icon' => $icon
         ]);
     }
+
 
     #[Route('/notes/create')]
     public function createNote(EntityManagerInterface $entityManager, Request $request): RedirectResponse
@@ -94,6 +95,7 @@ class NotesController extends AbstractController
 
         return $this->redirectToRoute('notes');
     }
+
 
     #[Route('notes/update/{id}')]
     public function updateNote(EntityManagerInterface $entityManager, Request $request, int $id)
