@@ -102,13 +102,17 @@ class NotesController extends AbstractController
     {
         $note = $entityManager->getRepository(Notes::class)->find($id);
         $text = $request->query->get('text');
+        $update = null;
 
-        $note->setText($text);
-        $entityManager->flush();
+        if ($text !== $note->getText()) {
+            $note->setText($text);
+            $entityManager->flush();
+            $update = 'update';
+        }
 
         return $this->redirectToRoute('show', [
             'id' => $id,
-            'update' => 'update'
+            'update' => $update
         ]);
     }
 }

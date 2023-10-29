@@ -13,9 +13,14 @@ export function showButton() {
   if (confirm && input) {
     input.addEventListener('focus', toggle);
     input.addEventListener('blur', toggle);
+    input.addEventListener('keydown', (e) => {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+    });
     abort.addEventListener('click', (e) => {
       e.preventDefault();
-      document.activeElement == null;
+      document.activeElement = null;
     });
   }
 }
