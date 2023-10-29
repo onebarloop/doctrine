@@ -3,7 +3,7 @@
 {% endblock %}
 {% block body %}
 
-	<h1 class="mb-12 text-[25px]">My Notes</h1>
+	<h1 class="mb-12 text-[25px] underline underline-offset-2 decoration-black/20 decoration-[1.5px] decoration-double">My Notes</h1>
 	<div>
 		{% for note in notes %}
 			<div id="{{ note.id }}" class="note cursor-pointer hover:bg-slate-300 note p-2 grid grid-cols-3 gap-y-4 items-start {% if loop.index is odd %} bg-slate-200 {% else %} bg-slate-100 {% endif %}">
