@@ -1,6 +1,7 @@
 const confirm = document.querySelector('.js-update-confirm');
 const abort = document.querySelector('.js-update-abort');
 const input = document.querySelector('.js-update-field');
+const backBtn = document.querySelector('#js-back-btn');
 
 const toggle = () => {
   confirm.classList.toggle('h-0');
@@ -11,6 +12,11 @@ const toggle = () => {
 
 export function showButton() {
   if (confirm && input) {
+    backBtn.addEventListener('mousedown', (e) => {
+      if (document.activeElement === input) {
+        backBtn.click();
+      }
+    });
     input.addEventListener('focus', toggle);
     input.addEventListener('blur', toggle);
     input.addEventListener('keydown', (e) => {
@@ -18,9 +24,10 @@ export function showButton() {
         e.preventDefault();
       }
     });
-    abort.addEventListener('click', (e) => {
-      e.preventDefault();
-      document.activeElement = null;
+
+    abort.addEventListener('mousedown', () => {
+      abort.click();
+      document.activeElement.blur();
     });
   }
 }
